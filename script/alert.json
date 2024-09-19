@@ -1,0 +1,4487 @@
+{
+    "name" : "NeptuneOSAlertConfig",
+    "description": "Neptune OS alert definitions",
+    "version" : "v0.3.0",
+    "released" : "2024-08-22 16:35:21",
+
+    "modules" : {
+        "robot" : ["robot", "maincontroller", "lifter", "ledlight", "motor", "encoder", 
+            "fogsensor", "depthsensor", "pumpsensor", "fogbox", "pushbox", 
+            "pumpbox", "powerbox", "algodash", "cyberbot", "robotsystem", "ais"]
+    },
+    
+    "alerts" : [
+        {
+            "code" : 1006,
+            "name" : "All encoder unavailable",
+            "app" : "robot",
+            "module" : "robot",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "左右小轮均悬空，会导致里程严重偏差",
+                    "mainTitle": "左右小轮均悬空，会导致里程严重偏差",
+                    "subTitle": "请切换到「大轮模式」"
+                },
+                "en": {
+                    "description": "Both left and right small wheels are suspended, which will cause a serious deviation in mileage.",
+                    "mainTitle": "Both left and right small wheels are suspended, which will cause a serious deviation in mileage.",
+                    "subTitle": "Please switch to 'Large Wheel Mode."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 1007,
+            "name" : "All encoder unavailable switch to big fusion",
+            "app" : "robot",
+            "module" : "robot",
+            "active" : true,
+            "type" : "event",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "自动模式中，因小轮均悬空，已内部切换为「大轮模式」",
+                    "mainTitle": "自动模式中，因小轮均悬空，已内部切换为「大轮模式」",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "In automatic mode, due to the suspension of both small wheels, the system has internally switched to 'Large Wheel Mode'.",
+                    "mainTitle": "In automatic mode, due to the suspension of both small wheels, the system has internally switched to 'Large Wheel Mode'.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 1008,
+            "name" : "Encoder unavailable clear switch to small fusion",
+            "app" : "robot",
+            "module" : "robot",
+            "active" : true,
+            "type" : "event",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "自动模式中，小轮恢复正常，已内部切换为「小轮模式」",
+                    "mainTitle": "自动模式中，小轮恢复正常，已内部切换为「小轮模式」",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "In automatic mode, the small wheels have returned to normal, and the system has internally switched back to 「Small Wheel Mode」.",
+                    "mainTitle": "In automatic mode, the small wheels have returned to normal, and the system has internally switched back to 「Small Wheel Mode」.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        },
+        {
+            "code" : 2000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控MCU离线，无法控制机器",
+                    "mainTitle": "主控MCU离线，无法控制机器",
+                    "subTitle": "① 请断电重启3次，可恢复则是软件故障；②不可恢复则是主控盒内硬件故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "Main control MCU is offline and unable to control the machine.",
+                    "mainTitle": "Main control MCU is offline and unable to control the machine.",
+					"subTitle": "1.Power off and restart the system three times. If it recovers, it’s a software problem. 2.If not, it’s a hardware fault in the power, requiring professional repair or machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 2001,
+            "name" : "Temperature too high",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控主板温度偏高",
+                    "mainTitle": "主控主板温度偏高",
+                    "subTitle": "请注意使用"
+                },
+                "en": {
+                    "description": "Main control board is overheating.",
+                    "mainTitle": "Main control board is overheating.",
+                    "subTitle": "Please be cautious when using."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2002,
+            "name" : "Temperature excessively high",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控主板温度过高",
+                    "mainTitle": "主控主板温度过高",
+                    "subTitle": "请注意使用"
+                },
+                "en": {
+                    "description": "Main control board temperature is abnormally high.",
+                    "mainTitle": "Main control board temperature is abnormally high.",
+                    "subTitle": "Please be cautious when using."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2003,
+            "name" : "Humidity too high",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控主板湿度偏高",
+                    "mainTitle": "主控主板湿度偏高",
+                    "subTitle": "请注意使用"
+                },
+                "en": {
+                    "description": "The humidity of the main control board is too high.",
+                    "mainTitle": "The humidity of the main control board is too high.",
+                    "subTitle": "Please be cautious when using."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2004,
+            "name" : "Humidity excessively high",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控主板湿度过高",
+                    "mainTitle": "主控主板湿度过高",
+                    "subTitle": "请注意使用"
+                },
+                "en": {
+                    "description": "Main control board humidity is abnormally high.",
+                    "mainTitle": "Main control board humidity is abnormally high.",
+                    "subTitle": "Please be cautious when using."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2005,
+            "name" : "Not in running mode",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控不在正常模式",
+                    "mainTitle": "主控不在正常模式",
+                    "subTitle": "请联系维修人员恢复到正常模式"
+                },
+                "en": {
+                    "description": "The main control is not in the normal mode.",
+                    "mainTitle": "The main control is not in the normal mode.",
+                    "subTitle": "Please contact the maintenance personnel to restore to normal mode."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },        
+        {
+            "code" : 2006,
+            "name" : "Temperature sensor not available",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控温湿度传感器失效",
+                    "mainTitle": "主控温湿度传感器失效",
+                    "subTitle": "请注意使用"
+                },
+                "en": {
+                    "description": "The main control temperature and humidity sensor is malfunctioning.",
+                    "mainTitle": "The main control temperature and humidity sensor is malfunctioning.",
+                    "subTitle": "Please be cautious when using."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 2007,
+            "name" : "Chassis info changed",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机架信息改变，请联系维修人员清除",
+                    "mainTitle": "机架信息改变",
+                    "subTitle": "请联系维修人员清除"
+                },
+                "en": {
+                    "description": "Chassis data has changed; please contact maintenance personnel to clear.",
+                    "mainTitle": "Chassis data has changed.",
+                    "subTitle": "please contact maintenance personnel to clear.ID box is not available.RTC is not available."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        },
+        {
+            "code" : 2008,
+            "name" : "Idbox not available",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "ID盒不可用",
+                    "mainTitle": "ID盒不可用",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "ID box is not available.RTC is not available.",
+                    "mainTitle": "ID box is not available.RTC is not available.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2009,
+            "name" : "RTC not available",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "RTC不可用",
+                    "mainTitle": "RTC不可用",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "RTC is not available.",
+                    "mainTitle": "RTC is not available.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2010,
+            "name" : "Lid has been opened",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控开盖状态未清除",
+                    "mainTitle": "主控开盖状态未清除",
+                    "subTitle": "请联系维修人员清除"
+                },
+                "en": {
+                    "description": "Main control cover status remains uncleared",
+                    "mainTitle": "Main control cover status remains uncleared",
+                    "subTitle": "Please contact maintenance personnel to clear"
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2011,
+            "name" : "Cpu usage too high",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控CPU使用率偏高",
+                    "mainTitle": "主控CPU使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The CPU usage of the main control is too high.",
+                    "mainTitle": "The CPU usage of the main control is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        },
+        {
+            "code" : 2012,
+            "name" : "CPU usage excessively high",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控CPU使用率过高",
+                    "mainTitle": "主控CPU使用率过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The CPU usage of the main control is excessively high.",
+                    "mainTitle": "The CPU usage of the main control is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2013,
+            "name" : "Memory usage too high",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控内存使用率偏高",
+                    "mainTitle": "主控内存使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The memory usage of the main control is too high.",
+                    "mainTitle": "The memory usage of the main control is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        },
+        {
+            "code" : 2014,
+            "name" : "Memory usage excessively high",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "主控内存使用率过高",
+                    "mainTitle": "主控内存使用率过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The memory usage of the main control is excessively high.",
+                    "mainTitle": "The memory usage of the main control is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 2015,
+            "name" : "Motor Recovery failed",
+            "app" : "robot",
+            "module" : "maincontroller",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机异常故障，无法行走",
+                    "mainTitle": "电机异常故障，无法行走",
+                    "subTitle": "①请断电重启3次;②重后如不可恢复则是电机硬件故障,需专业检修,并更换机器 "
+                },                
+                "en": {
+                    "description": "Motor malfunction; unable to operate.",
+                    "mainTitle": "Motor malfunction; unable to operate.",
+                    "subTitle": "1.Power off and restart the system three times. 2. If the problem is not fixed, it indicates a hardware fault with the motor. Professional repair is required, and the machine may need to be replaced."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 3000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机离线，无法升降，请断电后检查「连接线」",
+                    "mainTitle": "舵机离线，无法升降",
+                    "subTitle": "① 请断电后检查「连接线」；②重启后如不可恢复，需硬件工程师查看；③不影响任务可继续作业"
+                },
+                "en": {
+                    "description": "Servo is offline and unable to lift or lower. Please power off and check the connections.",
+                    "mainTitle": "Servo is offline and unable to lift or lower.",
+                    "subTitle": "1. Please power off and check the connections. 2. If the issue persists after restarting, a hardware engineer needs to inspect it. 3. Continue operations if the issue does not affect the task."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 3001,
+            "name" : "Position error",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机未校准",
+                    "mainTitle": "舵机未校准",
+                    "subTitle": "请联系维修人员重新校准"
+                },
+                "en": {
+                    "description": "Servo is not calibrated.",
+                    "mainTitle": "Servo is not calibrated.",
+                    "subTitle": "Please contact maintenance personnel to recalibrate."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 3002,
+            "name" : "Over load",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机过载异常",
+                    "mainTitle": "舵机过载异常",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Servo overload error.",
+                    "mainTitle": "Servo overload error.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 3003,
+            "name" : "Over current",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机过流异常",
+                    "mainTitle": "舵机过流异常",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Servo overcurrent error.",
+                    "mainTitle": "Servo overcurrent error.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 3004,
+            "name" : "Over heating",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机过温异常",
+                    "mainTitle": "舵机过温异常",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Servo overheating error.",
+                    "mainTitle": "Servo overheating error.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 3005,
+            "name" : "Report other error",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机其他异常",
+                    "mainTitle": "舵机其他异常",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "There are other errors with the Servo.",
+                    "mainTitle": "There are other errors with the Servo.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 3006,
+            "name" : "Obstructed",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "event",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机遇阻",
+                    "mainTitle": "舵机遇阻",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Servo encounters an obstruction.",
+                    "mainTitle": "Servo encounters an obstruction.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 3007,
+            "name" : "Temperature too high",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机温度偏高",
+                    "mainTitle": "舵机温度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Servo temperature is too high.",
+                    "mainTitle": "Servo temperature is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 3008,
+            "name" : "Static load too high",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机静态负载过大",
+                    "mainTitle": "舵机静态负载过大",
+                    "subTitle": "请检查舵机结构件是否有变形"
+                },
+                "en": {
+                    "description": "Servo static load is too high.",
+                    "mainTitle": "Servo static load is too high.",
+                    "subTitle": "Please check if the servo structure has deformation."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },   
+        {
+            "code" : 3009,
+            "name" : "Servo jammed",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机目标未到达",
+                    "mainTitle": "舵机目标未到达",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The servo target has not been reached.",
+                    "mainTitle": "The servo target has not been reached.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },       
+        {
+            "code" : 3011,
+            "name" : "Servo raise failed when forbidden move",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "舵机无法升起，已禁止行走",
+                    "mainTitle": "舵机无法升起，已禁止行走",
+                    "subTitle": "解除禁足后方可继续行走"
+                },
+                "en": {
+                    "description": "The servo motor cannot lift, operation has been prohibited.",
+                    "mainTitle": "The servo motor cannot lift, operation has been prohibited.",
+                    "subTitle": "Operating can resume once the prohibition has been lifted."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },       
+        {
+            "code" : 3012,
+            "name" : "Stroke becomes shorter",
+            "app" : "robot",
+            "module" : "lifter",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "升降器行程变小，请检查结构或电机是否卡住",
+                    "mainTitle": "升降器行程变小",
+                    "subTitle": "请检查结构或电机是否卡住"
+                },
+                "en": {
+                    "description": "The lifter stroke has become shorter, please check if the structure or motor is stuck.",
+                    "mainTitle": "The lifter stroke has become shorter",
+                    "subTitle": "Please check if the structure or motor is stuck."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED离线",
+                    "mainTitle": "LED离线",
+                    "subTitle": "请检查LED结构件"
+                },
+                "en": {
+                    "description": "LED is offline.",
+                    "mainTitle": "LED is offline.",
+                    "subTitle": "Please check the LED structure."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 4001,
+            "name" : "Temperature too high",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED温度偏高",
+                    "mainTitle": "LED温度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "LED temperature is too high.",
+                    "mainTitle": "LED temperature is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4002,
+            "name" : "Temperature excessively high",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED温度过高",
+                    "mainTitle": "LED温度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "LED temperature is excessively high.",
+                    "mainTitle": "LED temperature is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4003,
+            "name" : "Humidity too high",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED湿度偏高",
+                    "mainTitle": "LED湿度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "LED humidity is too high.",
+                    "mainTitle": "LED humidity is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4004,
+            "name" : "Humidity excessively high",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED湿度过高",
+                    "mainTitle": "LED湿度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "LED humidity is excessively high.",
+                    "mainTitle": "LED humidity is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4005,
+            "name" : "Temperature sensor disconnected",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED温湿度传感器异常",
+                    "mainTitle": "LED温湿度传感器异常",
+                    "subTitle": "温湿度失效"
+                },
+                "en": {
+                    "description": "LED temperature and humidity sensor is abnormal.",
+                    "mainTitle": "LED temperature and humidity sensor is abnormal.",
+                    "subTitle": "The temperature and humidity sensor is malfunctioning."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4006,
+            "name" : "NTC short circuit",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED-NTC短路",
+                    "mainTitle": "LED-NTC短路",
+                    "subTitle": "温湿度失效"
+                },
+                "en": {
+                    "description": "LED-NTC short circuit.LED-NTC open circuit.",
+                    "mainTitle": "LED-NTC short circuit.LED-NTC open circuit.",
+                    "subTitle": "The temperature and humidity sensor is malfunctioning."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4007,
+            "name" : "NTC open circuit",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED-NTC开路",
+                    "mainTitle": "LED-NTC开路",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "LED-NTC open circuit.",
+                    "mainTitle": "LED-NTC open circuit.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4008,
+            "name" : "led lamp over heating",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED灯珠温度过高",
+                    "mainTitle": "LED灯珠温度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The temperature of the LED beads is excessively high.",
+                    "mainTitle": "The temperature of the LED beads is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4009,
+            "name" : "Input voltage too low",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED欠压告警",
+                    "mainTitle": "LED欠压告警",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "LED alert: The input voltage is too low",
+                    "mainTitle": "LED alert: The input voltage is too low",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4010,
+            "name" : "Input voltage too high",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED过压告警",
+                    "mainTitle": "LED过压告警",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "LED alert: The input voltage is too high",
+                    "mainTitle": "LED alert: The input voltage is too high",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 4011,
+            "name" : "Over heating protection",
+            "app" : "robot",
+            "module" : "ledlight",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "LED已过热保护关灯",
+                    "mainTitle": "LED已过热保护关灯",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "LED lights have shut off due to overheat protection.",
+                    "mainTitle": "LED lights have shut off due to overheat protection.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 5000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机离线，无法行走",
+                    "mainTitle": "电机离线，无法行走",
+                    "subTitle": "① 请断电后检查「连接线」；②重启不可恢疑似电机故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "The motor is offline, unable to operate.",
+                    "mainTitle": "The motor is offline, unable to operate.",
+                    "subTitle": "1.Power off and and check the connection. 2. If the problem is not fixed, it is suspected to be a motor fault. Professional repair is required, and the machine may need to be replaced."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5001,
+            "name" : "Config error",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机配置错误，无法行走",
+                    "mainTitle": "电机配置错误，无法行走",
+                    "subTitle": "请返回维护人员设置"
+                },
+                "en": {
+                    "description": "Motor config error，unable to move",
+                    "mainTitle": "Motor config error，unable to move",
+                    "subTitle": "Please return to the maintenance personnel for settings."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5002,
+            "name" : "Init fail",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机初始化出错，无法行走",
+                    "mainTitle": "电机初始化出错，无法行走",
+                    "subTitle": "请返回维护人员设置"
+                },
+                "en": {
+                    "description": "Motor initialization error, unable to move.",
+                    "mainTitle": "Motor initialization error, unable to move.",
+                    "subTitle": "Please return to the maintenance personnel for settings."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5003,
+            "name" : "Node state error",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机节点状态异常，无法行走",
+                    "mainTitle": "电机节点状态异常，无法行走",
+                    "subTitle": "①系统自恢复；②自恢复失败需人工断电重启3次；③依旧失败需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "Motor node status error, unable to move.",
+                    "mainTitle": "Motor node status error, unable to move.",
+                    "subTitle": "1. The system will self-recover; 2. if self-recovery fails, manually power off and restart three times; 3. if it still fails, it is  uspected to be a motor fault, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5004,
+            "name" : "Driver fault",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机驱动器故障，无法行走",
+                    "mainTitle": "电机驱动器故障，无法行走",
+                    "subTitle": "①系统自恢复；②自恢复失败需人工断电重启3次；③依旧失败需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "Motor driver error, unable to move.",
+                    "mainTitle": "Motor driver error, unable to move.",
+                    "subTitle": "1. The system will self-recover; 2. if self-recovery fails, manually power off and restart three times; 3. if it still fails, it is  uspected to be a motor fault, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5005,
+            "name" : "Emergency error",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机紧急错误，无法行走",
+                    "mainTitle": "电机紧急错误，无法行走",
+                    "subTitle": "①系统自恢复；②自恢复失败需人工断电重启3次；③依旧失败需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "Motor emergency error, unable to move.",
+                    "mainTitle": "Motor emergency error, unable to move.",
+                    "subTitle": "1. The system will self-recover; 2. if self-recovery fails, manually power off and restart three times; 3. if it still fails, it is  uspected to be a motor fault, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5006,
+            "name" : "Encoder unavailable",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机编码器未校准，无法行走",
+                    "mainTitle": "电机编码器未校准，无法行走",
+                    "subTitle": "请返回维护人员设置"
+                },
+                "en": {
+                    "description": "Motor encoder is not calibrated, unable to move.",
+                    "mainTitle": "Motor encoder is not calibrated, unable to move.",
+                    "subTitle": "Please return to the maintenance personnel for settings."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5007,
+            "name" : "Encoder not calibrated",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机编码器未校准/故障，无法转向",
+                    "mainTitle": "电机编码器未校准/故障，无法转向",
+                    "subTitle": "① 请检查并手动掰正「转向轮」；②还不行则为「出厂未校准」需产测介入"
+                },
+                "en": {
+                    "description": "Motor encoder is not calibrated/faulty, unable to turn.",
+                    "mainTitle": "Motor encoder is not calibrated/faulty, unable to turn.",
+                    "subTitle": "1. Check and manually reset the 'steering wheel'; 2. if it still doesn't work, it could be an 'out-of-factory calibration' issue that requires the involvement of the production measurement team."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5008,
+            "name" : "Encoder emergency error",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机编码器发生紧急错误，无法转向",
+                    "mainTitle": "电机编码器发生紧急错误，无法转向",
+                    "subTitle": "① 请断电重启3次；②不可恢复则是编码器故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "Motor encoder emergency error, unable to turn.",
+                    "mainTitle": "Motor encoder emergency error, unable to turn.",
+                    "subTitle": "1. Please power off and restart three times; 2. If it is not recoverable, it is a encoder fault, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5009,
+            "name" : "Software error",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机运动控制软件错误，无法行走",
+                    "mainTitle": "电机运动控制软件错误，无法行走",
+                    "subTitle": "疑似软件不匹配/硬件版本更新，请返回维护人员检查"
+                },
+                "en": {
+                    "description": "Motor motion control software error, unable to move.",
+                    "mainTitle": "Motor motion control software error, unable to move.",
+                    "subTitle": "Suspected software mismatch/hardware version update, please return to the maintenance personnel for inspection."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 5010,
+            "name" : "Current too high",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机电流偏高",
+                    "mainTitle": "电机电流偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Motor current is too high.",
+                    "mainTitle": "Motor current is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        },
+        {
+            "code" : 5011,
+            "name" : "Current excessively high",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电机电流过高",
+                    "mainTitle": "电机电流过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Motor current is excessively high.",
+                    "mainTitle": "Motor current is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 5016,
+            "name" : "Value Error",
+            "app" : "robot",
+            "module" : "motor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "大轮异常，会导致里程偏差",
+                    "mainTitle": "大轮异常，会导致里程偏差",
+                    "subTitle": "请切换到「小轮模式」"
+                },
+                "en": {
+                    "description": "Large wheel error, which will cause mileage deviation.",
+                    "mainTitle": "Large wheel error, which will cause mileage deviation.",
+                    "subTitle": "Please switch to 「Small Wheel Mode」."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 6000,
+            "name" : "Value unusable",
+            "app" : "robot",
+            "module" : "encoder",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "小轮悬空",
+                    "mainTitle": "小轮悬空",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Small wheel is suspended.",
+                    "mainTitle": "Small wheel is suspended.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 7000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "fogsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG离线，无法对准/转换/定位",
+                    "mainTitle": "FOG离线，无法对准/转换/定位",
+                    "subTitle": "① 请断电后检查「连接线」；②重启不可恢则是FOG故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "FOG is offline, unable to align/convert/locate.",
+                    "mainTitle": "FOG is offline, unable to align/convert/locate.",
+                    "subTitle": "1. Please power off and check the connection; 2. If it does not recover after restarting, it is suspected to be a FOG error, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 7001,
+            "name" : "Self check failed",
+            "app" : "robot",
+            "module" : "fogsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG自检错误，无法对准/转换/定位",
+                    "mainTitle": "FOG自检错误，无法对准/转换/定位",
+                    "subTitle": "① 请断电重启3次；②不可恢复则是FOG故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "FOG self-check error, unable to align/convert/locate.",
+                    "mainTitle": "FOG self-check error, unable to align/convert/locate.",
+                    "subTitle": "1. Please power off and restart three times; 2. If it is not recoverable, it is a FOG error, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 7002,
+            "name" : "Communication error",
+            "app" : "robot",
+            "module" : "fogsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG通信异常，无法对准/转换/定位",
+                    "mainTitle": "FOG通信异常，无法对准/转换/定位",
+                    "subTitle": "① 请断电重启3次；②不可恢复则是FOG故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "FOG communication error, unable to align/convert/locate.",
+                    "mainTitle": "FOG communication error, unable to align/convert/locate.",
+                    "subTitle": "1. Please power off and restart three times; 2. If it is not recoverable, it is a FOG error, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 7003,
+            "name" : "Accelerometer error",
+            "app" : "robot",
+            "module" : "fogsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG加速计异常，无法对准/转换/定位",
+                    "mainTitle": "FOG加速计异常，无法对准/转换/定位",
+                    "subTitle": "① 请断电重启3次；②不可恢复则是FOG故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "FOG accelerometer error, unable to align/convert/locate.",
+                    "mainTitle": "FOG accelerometer error, unable to align/convert/locate.",
+                    "subTitle": "1. Please power off and restart three times; 2. If it is not recoverable, it is a FOG error, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 7004,
+            "name" : "Gyroscope error",
+            "app" : "robot",
+            "module" : "fogsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG陀螺仪异常，无法对准/转换/定位",
+                    "mainTitle": "FOG陀螺仪异常，无法对准/转换/定位",
+                    "subTitle": "① 请断电重启3次；②不可恢复则是FOG故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "FOG gyroscope error, unable to align/convert/locate.",
+                    "mainTitle": "FOG gyroscope error, unable to align/convert/locate.",
+                    "subTitle": "1. Please power off and restart three times; 2. If it is not recoverable, it is a FOG error, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 7005,
+            "name" : "Quaternion error",
+            "app" : "robot",
+            "module" : "fogsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG四元数异常，无法对准/转换/定位",
+                    "mainTitle": "FOG四元数异常，无法对准/转换/定位",
+                    "subTitle": "① 请断电重启3次；②不可恢复则是FOG故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "FOG quaternion error, unable to align/convert/locate.",
+                    "mainTitle": "FOG quaternion error, unable to align/convert/locate.",
+                    "subTitle": "1. Please power off and restart three times; 2. If it is not recoverable, it is a FOG error, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 7006,
+            "name" : "Value over range",
+            "app" : "robot",
+            "module" : "fogsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG超量程，无法对准/转换/定位",
+                    "mainTitle": "FOG超量程，无法对准/转换/定位",
+                    "subTitle": "① 请断电重启3次；②不可恢复则是FOG故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "FOG value out of range, unable to align/convert/locate.",
+                    "mainTitle": "FOG value out of range, unable to align/convert/locate.",
+                    "subTitle": "1. Please power off and restart three times; 2. If it is not recoverable, it is a FOG error, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 8000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "depthsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "深度传感器失效，无法定位",
+                    "mainTitle": "深度传感器失效，无法定位",
+                    "subTitle": "需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "Depth sensor offline, unable to locate.",
+                    "mainTitle": "Depth sensor offline, unable to locate.",
+                    "subTitle": "Requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 9000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "pumpsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压传感器离线，无泵压数据",
+                    "mainTitle": "泵压传感器离线，无泵压数据",
+                    "subTitle": "① 请断电后检查「连接线」；②重启不可恢疑似泵压传感器故障，需专业检修；③可看水泵机械表继续作业"
+                },
+                "en": {
+                    "description": "Pump pressure sensor offline, no pump pressure data.",
+                    "mainTitle": "Pump pressure sensor offline, no pump pressure data.",
+                    "subTitle": "1. Please power off and check the connection ; 2.If it does not recover after restarting, it is suspected to be a pump pressure sensor error, requiring professional maintenance; 3. You can continue to operate by looking at the mechanical gauge of the water pump."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 9001,
+            "name" : "Short circuit",
+            "app" : "robot",
+            "module" : "pumpsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压传感器短路，无泵压数据",
+                    "mainTitle": "泵压传感器短路，无泵压数据",
+                    "subTitle": "① 请断电重启1次；②重启不可恢疑似泵压传感器故障，需专业检修；③可看水泵机械表继续作业"
+                },
+                "en": {
+                    "description": "Pump pressure sensor short circuit, no pump pressure data.",
+                    "mainTitle": "Pump pressure sensor short circuit, no pump pressure data.",
+                    "subTitle": "1. Please power off and restart once ; 2.If it does not recover after restarting, it is suspected to be a pump pressure sensor error, requiring professional maintenance; 3. You can continue to operate by looking at the mechanical gauge of the water pump."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 9002,
+            "name" : "Value over range",
+            "app" : "robot",
+            "module" : "pumpsensor",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压传感器超量程，无泵压数据",
+                    "mainTitle": "泵压传感器超量程，无泵压数据",
+                    "subTitle": "① 请断电重启1次；②重启不可恢疑似泵压传感器故障，需专业检修；③可看水泵机械表继续作业"
+                },
+                "en": {
+                    "description": "Pump pressure sensor value out of range, no pump pressure data.",
+                    "mainTitle": "Pump pressure sensor value out of range, no pump pressure data.",
+                    "subTitle": "1. Please power off and restart once ; 2.If it does not recover after restarting, it is suspected to be a pump pressure sensor error, requiring professional maintenance; 3. You can continue to operate by looking at the mechanical gauge of the water pump."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 10000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "fogbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG盒离线，可能导致机器无法行走",
+                    "mainTitle": "FOG盒离线，可能导致机器无法行走",
+                    "subTitle": "请检修"
+                },
+                "en": {
+                    "description": "Compass offline, which may cause the machine to be unable to move.",
+                    "mainTitle": "Compass offline, which may cause the machine to be unable to move.",
+                    "subTitle": "Please check."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 10001,
+            "name" : "Temperature too high",
+            "app" : "robot",
+            "module" : "fogbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG盒温度偏高",
+                    "mainTitle": "FOG盒温度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Compass temperature is too high.",
+                    "mainTitle": "Compass temperature is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 10002,
+            "name" : "Temperature excessively high",
+            "app" : "robot",
+            "module" : "fogbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG盒温度过高",
+                    "mainTitle": "FOG盒温度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Compass temperature is excessively high.",
+                    "mainTitle": "Compass temperature is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 10003,
+            "name" : "Humidity too high",
+            "app" : "robot",
+            "module" : "fogbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG盒湿度偏高",
+                    "mainTitle": "FOG盒湿度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Compass humidity is too high.",
+                    "mainTitle": "Compass humidity is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 10004,
+            "name" : "Humidity excessively high",
+            "app" : "robot",
+            "module" : "fogbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG盒湿度过高",
+                    "mainTitle": "FOG盒湿度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Compass humidity is excessively high.",
+                    "mainTitle": "Compass humidity is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 10005,
+            "name" : "Temperature sensor disconnected",
+            "app" : "robot",
+            "module" : "fogbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "FOG盒温湿度传感器异常",
+                    "mainTitle": "FOG盒温湿度传感器异常",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Compass temperature and humidity sensor error.",
+                    "mainTitle": "Compass temperature and humidity sensor error.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+        },
+        {
+            "code" : 11000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒离线，顶出不可用",
+                    "mainTitle": "顶出盒离线，顶出不可用",
+                    "subTitle": "① 请断电后检查「连接线」；②重启不可恢疑似顶出盒故障，需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "Extrusion box offline, extrusion is not available.",
+                    "mainTitle": "Extrusion box offline, extrusion is not available.",
+                    "subTitle": "1. Please power off and check the connection; 2. If it does not recover after restarting, it is suspected to be a extrusion box fault, requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 11001,
+            "name" : "Temperature too high",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒温度偏高",
+                    "mainTitle": "顶出盒温度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Extrusion box temperature is too high.",
+                    "mainTitle": "Extrusion box temperature is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 11002,
+            "name" : "Temperature excessively high",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒温度过高",
+                    "mainTitle": "顶出盒温度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Extrusion box temperature is excessively high.",
+                    "mainTitle": "Extrusion box temperature is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 11003,
+            "name" : "Humidity too high",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒湿度偏高",
+                    "mainTitle": "顶出盒湿度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Extrusion box humidity is too high.",
+                    "mainTitle": "Extrusion box humidity is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 11004,
+            "name" : "Humidity excessively high",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒湿度过高",
+                    "mainTitle": "顶出盒湿度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Extrusion box humidity is excessively high.",
+                    "mainTitle": "Extrusion box humidity is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 11005,
+            "name" : "Temperature sensor disconnected",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒温湿度传感器异常",
+                    "mainTitle": "顶出盒温湿度传感器异常",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Extrusion box temperature and humidity sensor error.",
+                    "mainTitle": "Extrusion box temperature and humidity sensor error.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+        },
+        {
+            "code" : 11006,
+            "name" : "Battery not available",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒电池离线，可以顶出，但离线顶出不可用",
+                    "mainTitle": "顶出盒电池离线，可以顶出，但离线顶出不可用",
+                    "subTitle": "需专业检修，并更换机器"
+                },
+                "en": {
+                    "description": "Extrusion box battery offline, extrusion is possible, but offline extrude is not available.",
+                    "mainTitle": "Extrusion box battery offline, extrusion is possible, but offline extrude is not available.",
+                    "subTitle": "Requiring professional maintenance and machine replacement."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 11007,
+            "name" : "Battery in alarm",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒电池有告警",
+                    "mainTitle": "顶出盒电池有告警",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Battery alarm in the extrusion box.",
+                    "mainTitle": "Battery alarm in the extrusion box.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 11008,
+            "name" : "Anti-tamper alert",
+            "app" : "robot",
+            "module" : "pushbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "顶出盒防拆告警",
+                    "mainTitle": "顶出盒防拆告警",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Anti-tampering alert in the extrusion box.",
+                    "mainTitle": "Anti-tampering alert in the extrusion box.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 12000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "pumpbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压力盒离线，无泵压数据",
+                    "mainTitle": "泵压力盒离线，无泵压数据",
+                    "subTitle": "① 请断电后检查「连接线」；②重启不可恢疑似泵压盒故障，需专业检修；③可看水泵机械表继续作业"
+                },
+                "en": {
+                    "description": "pressure offline, no pump pressure data.",
+                    "mainTitle": "pressure offline, no pump pressure data.",
+                    "subTitle": "1. Please power off and check the connection; 2. If it does not recover after restarting, it is suspected to be a pressure fault, requiring professional maintenance; 3. You can continue to work by looking at the mechanical gauge of the water pump."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 12001,
+            "name" : "Temperature too high",
+            "app" : "robot",
+            "module" : "pumpbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压力盒温度偏高",
+                    "mainTitle": "泵压力盒温度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "pressure temperature is too high.",
+                    "mainTitle": "pressure temperature is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 12002,
+            "name" : "Temperature excessively high",
+            "app" : "robot",
+            "module" : "pumpbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压力盒温度过高",
+                    "mainTitle": "泵压力盒温度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "pressure temperature is excessively high.",
+                    "mainTitle": "pressure temperature is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 12003,
+            "name" : "Humidity too high",
+            "app" : "robot",
+            "module" : "pumpbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压力盒湿度偏高",
+                    "mainTitle": "泵压力盒湿度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "pressure humidity is too high.",
+                    "mainTitle": "pressure humidity is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 12004,
+            "name" : "Humidity excessively high",
+            "app" : "robot",
+            "module" : "pumpbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压力盒湿度过高",
+                    "mainTitle": "泵压力盒湿度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "pressure humidity is excessively high.",
+                    "mainTitle": "pressure humidity is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 12005,
+            "name" : "Temperature sensor disconnected",
+            "app" : "robot",
+            "module" : "pumpbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "泵压力盒温湿度传感器异常",
+                    "mainTitle": "泵压力盒温湿度传感器异常",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "pressure temperature and humidity sensor error.",
+                    "mainTitle": "pressure temperature and humidity sensor error.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+        },
+        {
+            "code" : 13000,
+            "name" : "Offline",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒离线，可继续使用，仅无法监测电源盒状态",
+                    "mainTitle": "电源盒离线，可继续使用，仅无法监测电源盒状态",
+                    "subTitle": "① 请断电后检查「连接线」；②重启不可恢疑似电源盒通讯故障，需专业检修；③不影响任务可继续作业"
+                },
+                "en": {
+                    "description": "power offline，it can operate, but we can't monitor its status.",
+                    "mainTitle": "power offline，it can operate, but we can't monitor its status.",
+                    "subTitle": "1. Please power off and check the connection; 2.If it does not recover after restarting, it is suspected to be a power communication error, requiring professional maintenance; 3.It does not affect the task and you can continue to operate."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 13001,
+            "name" : "Temperature too high",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒温度偏高",
+                    "mainTitle": "电源盒温度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "power temperature is too high.",
+                    "mainTitle": "power temperature is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 13002,
+            "name" : "Temperature excessively high",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒温度过高",
+                    "mainTitle": "电源盒温度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "power temperature is excessively high.",
+                    "mainTitle": "power temperature is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 13003,
+            "name" : "Humidity too high",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒湿度偏高",
+                    "mainTitle": "电源盒湿度偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "power humidity is too high.",
+                    "mainTitle": "power humidity is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 13004,
+            "name" : "Humidity excessively high",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒湿度过高",
+                    "mainTitle": "电源盒湿度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "power humidity is excessively high.",
+                    "mainTitle": "power humidity is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 13005,
+            "name" : "Temperature sensor disconnected",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒温湿度传感器异常",
+                    "mainTitle": "电源盒温湿度传感器异常",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "power temperature and humidity sensor error.",
+                    "mainTitle": "power temperature and humidity sensor error.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+        },
+        {
+            "code" : 13006,
+            "name" : "Drive power module disconnected",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒动力电源故障，可继续使用，仅无法监测电源盒状态",
+                    "mainTitle": "电源盒动力电源故障，可继续使用，仅无法监测电源盒状态",
+                    "subTitle": "① 请断电后检查「连接线」；②重启不可恢疑似电源盒通讯故障，需专业检修；③不影响任务可继续作业"
+                },
+                "en": {
+                    "description": "Drive power module is disconnected from the power，it can operate, but we can't check its status.",
+                    "mainTitle": "Drive power module is disconnected from the power，it can operate, but we can't check its status.",
+                    "subTitle": "1. Please power off and check the connection; 2.If it does not recover after restarting, it is suspected to be a power communication error, requiring professional maintenance; 3.It does not affect the task and you can continue to operate."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 13007,
+            "name" : "Control power module disconnected",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒控制电源故障，可继续使用，仅无法监测电源盒状态",
+                    "mainTitle": "电源盒控制电源故障，可继续使用，仅无法监测电源盒状态",
+                    "subTitle": "① 请断电后检查「连接线」；②重启不可恢疑似电源盒通讯故障，需专业检修；③不影响任务可继续作业"
+                },
+                "en": {
+                    "description": "Control power module is disconnected from the power.",
+                    "mainTitle": "Control power module is disconnected from the power.",
+                    "subTitle": "1. Please power off and check the connection; 2.If it does not recover after restarting, it is suspected to be a power communication error, requiring professional maintenance; 3.It does not affect the task and you can continue to operate."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 13008,
+            "name" : "Anti-tamper alert",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒防拆告警",
+                    "mainTitle": "电源盒防拆告警",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Anti-tampering alert in the power.",
+                    "mainTitle": "Anti-tampering alert in the power.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },  
+        {
+            "code" : 13009,
+            "name" : "Input voltage too high",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒总输入电压过高",
+                    "mainTitle": "电源盒总输入电压过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Total input voltage in the power is too high.",
+                    "mainTitle": "Total input voltage in the power is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },    
+        {
+            "code" : 13010,
+            "name" : "Input voltage too low",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒总输入电压过低",
+                    "mainTitle": "电源盒总输入电压过低",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Total input voltage in the power is too low.",
+                    "mainTitle": "Total input voltage in the power is too low.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },    
+        {
+            "code" : 13011,
+            "name" : "Input current too high",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒总输入电流过高",
+                    "mainTitle": "电源盒总输入电流过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Total input current in the power is too high.",
+                    "mainTitle": "Total input current in the power is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        }, 
+        {
+            "code" : 13012,
+            "name" : "Drive power module temperature too high",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒动力电源模块温度过高",
+                    "mainTitle": "电源盒动力电源模块温度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Drive power module temperature in the power is too high.",
+                    "mainTitle": "Drive power module temperature in the power is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 13013,
+            "name" : "Control power module temperature too high",
+            "app" : "robot",
+            "module" : "powerbox",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源盒控制电源模块温度过高",
+                    "mainTitle": "电源盒控制电源模块温度过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Control power module temperature in the power is too high.",
+                    "mainTitle": "Control power module temperature in the power is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },                                                 
+        {
+            "code" : 16000,
+            "name" : "Free storage low",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "磁盘空间已超过70%，请拍照发群里，OS研发会解决",
+                    "mainTitle": "磁盘空间已超过70%",
+                    "subTitle": "请拍照发群里，OS研发会解决"
+                },
+                "en": {
+                    "description": "Disk space has exceeded 70%, please take a photo and send it to the group, the OS R&D will resolve it.",
+                    "mainTitle": "Disk space has exceeded 70%",
+                    "subTitle": "Please take a photo and send it to the group, the OS development team will resolve it."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 16001,
+            "name" : "Free storage critically low",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "磁盘空间已超过90%，无法作业",
+                    "mainTitle": "磁盘空间已超过90%",
+                    "subTitle": "请立马联系YYL，需要立即解决，否则作业无法正常进行"
+                },
+                "en": {
+                    "description": "Disk space has exceeded 90%, unable to operate.",
+                    "mainTitle": "Disk space has exceeded 90%.",
+                    "subTitle": "Please contact YYL immediately, it needs to be resolved immediately, otherwise, operation cannot proceed normally."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 16002,
+            "name" : "Cpu usage too high",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人CPU使用率偏高",
+                    "mainTitle": "机器人CPU使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot CPU usage is too high.",
+                    "mainTitle": "Robot CPU usage is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 16003,
+            "name" : "CPU usage excessively high",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人CPU使用率过高",
+                    "mainTitle": "机器人CPU使用率过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot CPU usage is excessively high.",
+                    "mainTitle": "Robot CPU usage is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 16004,
+            "name" : "Memory usage too high",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人内存使用率偏高",
+                    "mainTitle": "机器人内存使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot memory usage is too high.",
+                    "mainTitle": "Robot memory usage is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },        
+        {
+            "code" : 16005,
+            "name" : "Memory usage excessively high",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人内存使用率过高，请重启机器",
+                    "mainTitle": "机器人内存使用率过高",
+                    "subTitle": "请重启机器"
+                },
+                "en": {
+                    "description": "Robot memory usage is excessively high, please restart the machine.",
+                    "mainTitle": "Robot memory usage is excessively high.",
+                    "subTitle": "Please restart the machine."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+
+        {
+            "code" : 16006,
+            "name" : "Core Process Exit",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "event",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人核心进程无响应或崩溃",
+                    "mainTitle": "机器人核心进程无响应或崩溃",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot core process is unresponsive or has crashed",
+                    "mainTitle": "Robot core process is unresponsive or has crashed",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 16007,
+            "name" : "General Process Exit",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "event",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人一般进程无响应或崩溃",
+                    "mainTitle": "机器人一般进程无响应或崩溃",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot general process is unresponsive or has crashed.",
+                    "mainTitle": "Robot general process is unresponsive or has crashed.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },        
+        {
+            "code" : 16010,
+            "name" : "Process CPU usage too high",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人进程CPU使用率偏高",
+                    "mainTitle": "机器人进程CPU使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot process CPU usage is too high.",
+                    "mainTitle": "Robot process CPU usage is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 16011,
+            "name" : "Process CPU usage excessively high",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人进程CPU使用率过高",
+                    "mainTitle": "机器人进程CPU使用率过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot process CPU usage is excessively high.",
+                    "mainTitle": "Robot process CPU usage is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },        
+        {
+            "code" : 16012,
+            "name" : "Process memory usage too high",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人进程内存使用率偏高",
+                    "mainTitle": "机器人进程内存使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot process memory usage is too high. ",
+                    "mainTitle": "Robot process memory usage is too high. ",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },        
+        {
+            "code" : 16013,
+            "name" : "Process memory usage excessively high",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人进程内存使用率过高",
+                    "mainTitle": "机器人进程内存使用率过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot process memory usage is excessively high.",
+                    "mainTitle": "Robot process memory usage is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 16014,
+            "name" : "Core process running error",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人核心进程运行错误或崩溃",
+                    "mainTitle": "机器人核心进程运行错误或崩溃",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot core process is unresponsive or has crashed.",
+                    "mainTitle": "Robot core process is unresponsive or has crashed.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },        
+        {
+            "code" : 16015,
+            "name" : "General process running error",
+            "app" : "robot",
+            "module" : "robotsystem",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人一般进程运行错误或崩溃",
+                    "mainTitle": "机器人一般进程运行错误或崩溃",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot general process is unresponsive or has crashed.",
+                    "mainTitle": "Robot general process is unresponsive or has crashed.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },        
+        {
+            "code" : 17001,
+            "name" : "Value error",
+            "app" : "robot",
+            "module" : "ais",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "AIS数据不可用",
+                    "mainTitle": "AIS数据不可用",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "AIS data is not available.",
+                    "mainTitle": "AIS data is not available.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 17002,
+            "name" : "Stale error",
+            "app" : "robot",
+            "module" : "ais",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "AIS数据长时间未更新",
+                    "mainTitle": "AIS数据长时间未更新",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "AIS data is not updated for a long time.",
+                    "mainTitle": "AIS data is not updated for a long time.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 17003,
+            "name" : "Validation error",
+            "app" : "robot",
+            "module" : "ais",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "AIS数据校验不通过",
+                    "mainTitle": "AIS数据校验不通过",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "AIS data validation failed.",
+                    "mainTitle": "AIS data validation failed.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 17004,
+            "name" : "Low accuracy",
+            "app" : "robot",
+            "module" : "ais",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "AIS数据精度低",
+                    "mainTitle": "AIS数据精度低",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Low accuracy of AIS data.",
+                    "mainTitle": "Low accuracy of AIS data.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 17005,
+            "name" : "Attitude update",
+            "app" : "robot",
+            "module" : "ais",
+            "active" : true,
+            "type" : "event",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "机器人姿态更新",
+                    "mainTitle": "机器人姿态更新",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Robot attitude update.",
+                    "mainTitle": "Robot attitude update.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 17006,
+            "name" : "Low frequency",
+            "app" : "robot",
+            "module" : "ais",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "AIS数据频率低",
+                    "mainTitle": "AIS数据频率低",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Low frequency of AIS data.",
+                    "mainTitle": "Low frequency of AIS data.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 17007,
+            "name" : "No ship mmsi",
+            "app" : "robot",
+            "module" : "ais",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "船舶没有设置MMSI数据",
+                    "mainTitle": "船舶没有设置MMSI数据",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "MMSI data is not established for the vessel.",
+                    "mainTitle": "MMSI data is not established for the vessel.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 20000,
+            "name" : "Offline",
+            "app" : "remotectrl",
+            "module" : "remotectrl",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器离线",
+                    "mainTitle": "遥控器离线",
+                    "subTitle": "请确认遥控器是否开机或者距离遥控箱距离太远"
+                },
+                "en": {
+                    "description": "controller is offline.",
+                    "mainTitle": "controller is offline.",
+                    "subTitle": "Please confirm whether the controller is turned on or if the distance from the control center is too far."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 20001,
+            "name" : "Low battery level",
+            "app" : "remotectrl",
+            "module" : "remotectrl",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器电量偏低",
+                    "mainTitle": "遥控器电量偏低",
+                    "subTitle": "请尽快给遥控器充电"
+                },
+                "en": {
+                    "description": "Low battery level of controller",
+                    "mainTitle": "Low battery level of controller",
+                    "subTitle": "Please charge the controller ASAP."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        },
+        {
+            "code" : 20002,
+            "name" : "Critically Low battery",
+            "app" : "remotectrl",
+            "module" : "remotectrl",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器电量过低",
+                    "mainTitle": "遥控器电量过低",
+                    "subTitle": "请立即给遥控器充电"
+                },
+                "en": {
+                    "description": "Critically Low battery of controller.",
+                    "mainTitle": "Critically Low battery of controller.",
+                    "subTitle": "Please charge the controller ASAP."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        },
+        {
+            "code" : 20003,
+            "name" : "Rocker not calibrated",
+            "app" : "remotectrl",
+            "module" : "remotectrl",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器摇杆未校准",
+                    "mainTitle": "遥控器摇杆未校准",
+                    "subTitle": "请用产测工具对摇杆进行校准"
+                },
+                "en": {
+                    "description": "controller joystick is not calibrated.",
+                    "mainTitle": "controller joystick is not calibrated.",
+                    "subTitle": "Please calibrate the joystick with the production testing tool."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        }, 
+        {
+            "code" : 20004,
+            "name" : "Poor wireless signal",
+            "app" : "remotectrl",
+            "module" : "remotectrl",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器信号差",
+                    "mainTitle": "遥控器信号差",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Poor controller signal",
+                    "mainTitle": "Poor controller signal",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        }, 
+        {
+            "code" : 20005,
+            "name" : "Emergency stop button pressed",
+            "app" : "remotectrl",
+            "module" : "remotectrl",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器急停按键被按下",
+                    "mainTitle": "遥控器急停按键被按下",
+                    "subTitle": "请确认是否发生紧急事件，再旋转急停按键来解除急停按键"
+                },
+                "en": {
+                    "description": "controller emergency stop button is pressed.",
+                    "mainTitle": "controller emergency stop button is pressed.",
+                    "subTitle": "Please confirm whether an emergency has occurred, then rotate the emergency stop button to release it."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        }, 
+        
+        {
+            "code" : 30000,
+            "name" : "Offline",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "网关监控到MUC离线，影响遥控箱电源状态监控",
+                    "mainTitle": "网关监控到MUC离线，影响遥控箱电源状态监控",
+                    "subTitle": "①遥控箱体上的「系统指示灯」，如果不亮则需专业维修，并更换遥控箱；②如亮则开盖检查MCU和工控机连接网线，断电重启还不行则更换遥控箱"
+                },
+                "en": {
+                    "description": "The gateway has detected that the MUC is offline, affecting the monitoring of the power status of the control center.",
+                    "mainTitle": "The gateway has detected that the MUC is offline, affecting the monitoring of the power status of the control center.",
+                    "subTitle": "①If the「System Indicator Light」on the control center isn't on, professional maintenance is required, and the control center should be replaced; ②If it is on, then open the cover to check the network cable connection between the MCU and the industrial computer. If a power-off restart does not resolve the issue, then replace the control center."
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+          }, 
+          {
+            "code" : 30001,
+            "name" : "Input power outage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "输入电源断电，已自动断开机器人供电",
+                    "mainTitle": "输入电源断电，已自动断开机器人供电",
+                    "subTitle": "①检查遥控箱空开；②检查发电机是否正常；③检查/更换「转电箱 - 连接线」链路"
+                },
+                "en": {
+                    "description": "Input power outage, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "Input power outage, the robot power supply has been automatically disconnected.",
+                    "subTitle": "1. Please check the control center circuit breaker; 2. Check if the generator is normal; 3. Check and replace the 'power transfer box - connection line' link."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+          }, 
+          {
+            "code" : 30002,
+            "name" : "Input power high voltage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控输入电压偏高",
+                    "mainTitle": "电源监控输入电压偏高",
+                    "subTitle": "请检查发电机状态是否异常"
+                },
+                "en": {
+                    "description": "Power supply monitoring input voltage is too high.",
+                    "mainTitle": "Power supply monitoring input voltage is too high.",
+                    "subTitle": "Please check if the generator status is abnormal."
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+          }, 
+          {
+            "code" : 30003,
+            "name" : "Input power over voltage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "输入电压过压，已自动断开机器人供电",
+                    "mainTitle": "输入电压过压，已自动断开机器人供电",
+                    "subTitle": "①检查发电机电表是否正常；②检查/更换「转电箱 - 连接线」链路"
+                },
+                "en": {
+                    "description": "Input voltage overvoltage, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "Input voltage overvoltage, the robot power supply has been automatically disconnected.",
+                    "subTitle": "1. Check if the generator is normal; 2. Check and replace the 'power transfer box - connection line' link."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          }, 
+          {
+            "code" : 30004,
+            "name" : "Input power low voltage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控输入电压欠压",
+                    "mainTitle": "电源监控输入电压电压",
+                    "subTitle": "请检查发电机状态是否异常"
+                },
+                "en": {
+                    "description": "Power supply monitoring input voltage is too low.",
+                    "mainTitle": "Power supply monitoring input voltage is too low.",
+                    "subTitle": "Please check if the generator status is abnormal."
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+          },   
+          {
+            "code" : 30005,
+            "name" : "Output power over voltage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "输出电压过压，已自动断开机器人供电，",
+                    "mainTitle": "输出电压过压，已自动断开机器人供电",
+                    "subTitle": "需转研发检查「AC/DC电源输出电压配置」是否正确"
+                },
+                "en": {
+                    "description": "Output voltage overvoltage, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "Output voltage overvoltage, the robot power supply has been automatically disconnected.",
+                    "subTitle": "Please transfer to R&D for inspection to ensure the 'AC/DC power output voltage configuration' is correct."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          },   
+          {
+            "code" : 30006,
+            "name" : "Output power low voltage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控输出电压欠压",
+                    "mainTitle": "电源监控输出电压欠压",
+                    "subTitle": "请检查AC/DC电源输出电压配置是否正确"
+                },
+                "en": {
+                    "description": "Power supply monitoring output voltage is too low.",
+                    "mainTitle": "Power supply monitoring output voltage is too low.",
+                    "subTitle": "Please check if the AC/DC power output voltage configuration is correct."
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+          },   
+          {
+            "code" : 30007,
+            "name" : "Output power over current",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控输出电流过大",
+                    "mainTitle": "电源监控输出电流过大",
+                    "subTitle": "请检查AC/DC电源输出电流配置是否正确或者机器人是否过载"
+                },
+                "en": {
+                    "description": "Power supply monitoring output current is too high.",
+                    "mainTitle": "Power supply monitoring output current is too high.",
+                    "subTitle": "Please check if the AC/DC power output current configuration is correct or if the robot is overloaded."
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+          },   
+          {
+            "code" : 30008,
+            "name" : "Gun head not inserted",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控枪头未插紧",
+                    "mainTitle": "电源监控枪头未插紧",
+                    "subTitle": "请确认遥控箱状态正常后插入枪头，并确保枪头处于插紧状态"
+                },
+                "en": {
+                    "description": "The power monitoring connector is not securely plugged in.",
+                    "mainTitle": "The power monitoring connector is not securely plugged in.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+          },   
+          {
+            "code" : 30009,
+            "name" : "Short circuit",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "疑似过流，已自动断开机器人供电",
+                    "mainTitle": "疑似过流，已自动断开机器人供电",
+                    "subTitle": "①回收机器人，检查机器人和线缆连接处有无损坏；②拔掉线缆，并将接头置于安全区域后，仅给线缆通电；如依旧提示过流则线缆问题，需更换线缆；③未过流则需更换机器人 "
+                },
+                "en": {
+                    "description": "Suspected overcurrent, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "Suspected overcurrent, the robot power supply has been automatically disconnected.",
+                    "subTitle": "①Retrieve the robot and inspect the robot and cable connections for any damage; ②Unplug the cables and place the connectors in a safe area, then power only the cables; if there is still an overcurrent indication, the cables are at fault and need to be replaced; ③If there is no overcurrent, the robot needs to be replaced."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          },   
+          {
+            "code" : 30010,
+            "name" : "Emergency stop button pressed",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控急停按键被按下",
+                    "mainTitle": "电源监控急停按键被按下",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Power supply monitoring emergency stop button is pressed.",
+                    "mainTitle": "Power supply monitoring emergency stop button is pressed.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },   
+          {
+            "code" : 30011,
+            "name" : "High temperature",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控温度偏高",
+                    "mainTitle": "电源监控温度偏高",
+                    "subTitle": "请确认空调制冷是否为打开状态"
+                },
+                "en": {
+                    "description": "Power supply monitoring temperature is too high.",
+                    "mainTitle": "Power supply monitoring temperature is too high.",
+                    "subTitle": "Please confirm if the air conditioning cooling is turned on."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          }, 
+          {
+            "code" : 30012,
+            "name" : "Over temperature",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控温度过高",
+                    "mainTitle": "电源监控温度过高",
+                    "subTitle": "请确认空调制冷是否为打开状态"
+                },
+                "en": {
+                    "description": "Power supply monitoring temperature is excessively high.",
+                    "mainTitle": "Power supply monitoring temperature is excessively high.",
+                    "subTitle": "Please confirm if the air conditioning cooling is turned on."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },  
+          {
+            "code" : 30013,
+            "name" : "High humidity",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控湿度偏高",
+                    "mainTitle": "电源监控湿度偏高",
+                    "subTitle": "请确认空调除湿是否为打开状态"
+                },
+                "en": {
+                    "description": "Power supply monitoring humidity is too high.",
+                    "mainTitle": "Power supply monitoring humidity is too high.",
+                    "subTitle": "Please confirm if the air conditioning dehumidifying is turned on."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          }, 
+          {
+            "code" : 30014,
+            "name" : "Over humidity",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控湿度过高",
+                    "mainTitle": "电源监控湿度过高",
+                    "subTitle": "请确认空调除湿是否为打开状态"
+                },
+                "en": {
+                    "description": "Power supply monitoring humidity is excessively high.",
+                    "mainTitle": "Power supply monitoring humidity is excessively high.",
+                    "subTitle": "Please confirm if the air conditioning dehumidifying is turned on."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },  
+          {
+            "code" : 30015,
+            "name" : "Output outage due to gun loose",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "枪头松动/拔出，已自动断开机器人供电",
+                    "mainTitle": "枪头松动/拔出，已自动断开机器人供电",
+                    "subTitle": "请检查枪头并插紧"
+                },
+                "en": {
+                    "description": "The connector is loose or unplugged, which has automatically disconnected the power supply to the robot.",
+                    "mainTitle": "The connector is loose or unplugged, which has automatically disconnected the power supply to the robot.",
+                    "subTitle": "Please check the connector and ensure it is securely plugged in."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+          },  
+          {
+            "code" : 30016,
+            "name" : "Output outage due to ac/dc power offline or fault",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "ACDC电源通讯断连/故障，已自动断开机器人供电",
+                    "mainTitle": "ACDC电源通讯断连/故障，已自动断开机器人供电",
+                    "subTitle": "需研发检修，并更换遥控箱"
+                },
+                "en": {
+                    "description": "ACDC power communication is disconnected/faulty, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "ACDC power communication is disconnected/faulty, the robot power supply has been automatically disconnected.",
+                    "subTitle": "R&D needs to inspect and replace the control center."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          },    
+          {
+            "code" : 30017,
+            "name" : "Output outage due to input outage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "输入电源断电，已自动断开机器人供电",
+                    "mainTitle": "输入电源断电，已自动断开机器人供电",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Input power outage, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "Input power outage, the robot power supply has been automatically disconnected.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          }, 
+          {
+            "code" : 30018,
+            "name" : "Output outage due to short circuit",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "疑似过流，已自动断开机器人供电",
+                    "mainTitle": "疑似过流，已自动断开机器人供电",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Suspected overcurrent, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "Suspected overcurrent, the robot power supply has been automatically disconnected.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          }, 
+          {
+            "code" : 30019,
+            "name" : "Output outage due to emergency stop button pressed",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "「急停按键」按下，已自动断开机器人供电",
+                    "mainTitle": "「急停按键」按下，已自动断开机器人供电",
+                    "subTitle": "重新供电请关闭「急停按键」"
+                },
+                "en": {
+                    "description": "'Emergency stop button' is pressed, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "'Emergency stop button' is pressed, the robot power supply has been automatically disconnected.",
+                    "subTitle": "Please turn off the 'emergency stop button' to resume power supply."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          }, 
+          {
+            "code" : 30020,
+            "name" : "Output outage due to input over voltage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "输入电压过压，已自动断开机器人供电",
+                    "mainTitle": "输入电压过压，已自动断开机器人供电",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Input voltage overvoltage, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "Input voltage overvoltage, the robot power supply has been automatically disconnected.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          }, 
+          {
+            "code" : 30021,
+            "name" : "Output outage due to output over voltage",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "fatal", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "输出电压过压，已自动断开机器人供电",
+                    "mainTitle": "输出电压过压，已自动断开机器人供电",
+                    "subTitle": "需研发检修，并更换遥控箱"
+                },
+                "en": {
+                    "description": "Output voltage overvoltage, the robot power supply has been automatically disconnected.",
+                    "mainTitle": "Output voltage overvoltage, the robot power supply has been automatically disconnected.",
+                    "subTitle": "R&D needs to inspect and replace the control center."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          },  
+          {
+            "code" : 30022,
+            "name" : "UPS offline",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控UPS离线",
+                    "mainTitle": "电源监控UPS离线",
+                    "subTitle": "请确认UPS是否已接好"
+                },
+                "en": {
+                    "description": "Power supply monitoring UPS is offline.",
+                    "mainTitle": "Power supply monitoring UPS is offline.",
+                    "subTitle": "Please confirm if the UPS is properly connected."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },   
+          {
+            "code" : 30023,
+            "name" : "ACDC Power offline",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控AC/DC电源离线",
+                    "mainTitle": "电源监控AC/DC电源离线",
+                    "subTitle": "请确认AC/DC电源是否已接好"
+                },
+                "en": {
+                    "description": "Power supply monitoring AC/DC power is offline.",
+                    "mainTitle": "Power supply monitoring AC/DC power is offline.",
+                    "subTitle": "Please confirm if the AC/DC power is properly connected."
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+          },   
+           {
+            "code" : 30024,
+            "name" : "AC offline",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控空调离线",
+                    "mainTitle": "电源监控空调离线",
+                    "subTitle": "请确认空调是否已接好"
+                },
+                "en": {
+                    "description": "Power supply monitoring air conditioning is offline.",
+                    "mainTitle": "Power supply monitoring air conditioning is offline.",
+                    "subTitle": "Please confirm if the air conditioning is properly connected."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },   
+          {
+            "code" : 30025,
+            "name" : "AC meter offline",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控交流电表离线",
+                    "mainTitle": "电源监控交流电表离线",
+                    "subTitle": "请确认交流电表是否已接好"
+                },
+                "en": {
+                    "description": "Power supply monitoring AC meter is offline.",
+                    "mainTitle": "Power supply monitoring AC meter is offline.",
+                    "subTitle": "Please confirm if the AC meter is properly connected."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },   
+          {
+            "code" : 30026,
+            "name" : "DC meter offline",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控直流电表离线",
+                    "mainTitle": "电源监控直流电表离线",
+                    "subTitle": "请确认直流电表是否已接好"
+                },
+                "en": {
+                    "description": "Power supply monitoring DC meter is offline.",
+                    "mainTitle": "Power supply monitoring DC meter is offline.",
+                    "subTitle": "Please confirm if the DC meter is properly connected."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },  
+          {
+            "code" : 30027,
+            "name" : "Insulation monitor offline",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控直流绝缘监测模块离线",
+                    "mainTitle": "电源监控直流绝缘监测模块离线",
+                    "subTitle": "请确认直流绝缘监测模块是否已接好"
+                },
+                "en": {
+                    "description": "Power supply monitoring DC insulation monitoring module is offline.",
+                    "mainTitle": "Power supply monitoring DC insulation monitoring module is offline.",
+                    "subTitle": "Please confirm if the DC insulation monitoring module is properly connected."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },  
+          {
+            "code" : 30028,
+            "name" : "Temperature and humidity sensor offline",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控温湿度传感器离线",
+                    "mainTitle": "电源监控温湿度传感器离线",
+                    "subTitle": "请确认温湿度传感器是否已接好"
+                },
+                "en": {
+                    "description": "Power supply monitoring temperature and humidity sensor is offline.",
+                    "mainTitle": "Power supply monitoring temperature and humidity sensor is offline.",
+                    "subTitle": "Please confirm if the temperature and humidity sensor is properly connected."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },  
+          {
+            "code" : 30029,
+            "name" : "UPS low battery level",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控UPS电池低电量",
+                    "mainTitle": "电源监控UPS电池低电量",
+                    "subTitle": "请把输入电源开关推上给电池充电"
+                },
+                "en": {
+                    "description": "Low battery of power supply monitoring UPS.",
+                    "mainTitle": "Low battery of power supply monitoring UPS.",
+                    "subTitle": "Please turn on the input power switch to charge the battery."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },  
+          {
+            "code" : 30030,
+            "name" : "UPS fault",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控UPS发生故障，请检查",
+                    "mainTitle": "电源监控UPS发生故障",
+                    "subTitle": "请检查UPS状态，确认是否需要更换UPS"
+                },
+                "en": {
+                    "description": "Power supply monitoring UPS has a fault, please check.",
+                    "mainTitle": "Power supply monitoring UPS has a fault.",
+                    "subTitle": "Please check the UPS status and confirm whether a UPS replacement is needed."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },  
+          {
+            "code" : 30031,
+            "name" : "UPS shutdown",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控UPS正在关机，请等UPS完全关机后才重新上电",
+                    "mainTitle": "电源监控UPS正在关机",
+                    "subTitle": "请等UPS完全关机后才重新上电"
+                },
+                "en": {
+                    "description": "Power supply monitoring UPS is shutting down, Please wait for the UPS to shut down completely before powering on again.",
+                    "mainTitle": "Power supply monitoring UPS is shutting down.",
+                    "subTitle": "Please wait for the UPS to shut down completely before powering on again."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+          },  
+          {
+            "code" : 30032,
+            "name" : "ACDC power fault",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控AC/DC电源故障",
+                    "mainTitle": "电源监控AC/DC电源故障",
+                    "subTitle": "请检查AC/DC电源状态，确认是否需要更换AC/DC电源"
+                },
+                "en": {
+                    "description": "Power supply monitoring AC/DC power has a fault.",
+                    "mainTitle": "Power supply monitoring AC/DC power has a fault.",
+                    "subTitle": "Please check the AC/DC power status and confirm whether an AC/DC power replacement is needed."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+          },  
+          {
+            "code" : 30033,
+            "name" : "AC fault",
+            "app" : "rcbox",
+            "module" : "powerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "电源监控空调故障",
+                    "mainTitle": "电源监控空调故障",
+                    "subTitle": "请检查空调状态，确认是否需要更换空调"
+                },
+                "en": {
+                    "description": "Power supply monitoring air conditioning has a fault.",
+                    "mainTitle": "Power supply monitoring air conditioning has a fault.",
+                    "subTitle": "Please check the air conditioning status and confirm whether an air conditioning replacement is needed."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          },  
+          
+         {
+            "code" : 31000,
+            "name" : "Remote PLC offline",
+            "app" : "rcbox",
+            "module" : "plc",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "线缆远端PLC离线，请检查机器人端PLC状态",
+                    "mainTitle": "线缆远端PLC离线",
+                    "subTitle": "请检查机器人端PLC状态"
+                },
+                "en": {
+                    "description": "The remote PLC at the cable end is offline; please check the status of the PLC at the robot end.",
+                    "mainTitle": "The remote PLC at the cable end is offline",
+                    "subTitle": "Please check the status of the PLC at the robot end."
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+          },  
+         {
+            "code" : 31001,
+            "name" : "Local PLC offline",
+            "app" : "rcbox",
+            "module" : "plc",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "线缆本地PLC离线，请检查遥控箱端PLC状态",
+                    "mainTitle": "线缆本地PLC离线",
+                    "subTitle": "请检查遥控箱端PLC状态"
+                },
+                "en": {
+                    "description": "The local PLC at the cable end is offline; please check the PLC status at the control center end.",
+                    "mainTitle": "The local PLC at the cable end is offline",
+                    "subTitle": "Please check the PLC status at the control center end"
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+          },  
+        {
+            "code" : 31002,
+            "name" : "Poor Signal",
+            "app" : "rcbox",
+            "module" : "plc",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "线缆信号差，请检查线缆网络",
+                    "mainTitle": "线缆信号差",
+                    "subTitle": "请检查线缆状态"
+                },
+                "en": {
+                    "description": "Poor cable signal, please check the cable network.",
+                    "mainTitle": "Poor cable signal",
+                    "subTitle": "Please check the cable network."
+                }
+            },
+            "submit": {
+                "level": "P2"
+            }
+        }, 
+        {
+            "code" : 31003,
+            "name" : "Medium signal",
+            "app" : "rcbox",
+            "module" : "plc",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "线缆信号一般，请检查线缆网络",
+                    "mainTitle": "线缆信号一般",
+                    "subTitle": "请检查线缆状态"
+                },
+                "en": {
+                    "description": "Weak cable signal; please check the cable network.",
+                    "mainTitle": "Weak cable signal.",
+                    "subTitle": "Please check the cable network."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        }, 
+        {
+            "code" : 32000,
+            "name" : "Offline",
+            "app" : "rcbox",
+            "module" : "gps",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "GPS离线，请检查工控机是否插入GPS模块",
+                    "mainTitle": "GPS离线",
+                    "subTitle": "请检查工控机是否插入GPS模块"
+                },
+                "en": {
+                    "description": "GPS offline; please check whether the GPS module has inserted to the industrial computer.",
+                    "mainTitle": "GPS offline",
+                    "subTitle": "Please check whether the GPS module has inserted to the industrial computer."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+          }, 
+          {
+            "code" : 32001,
+            "name" : "Poor Signal",
+            "app" : "rcbox",
+            "module" : "gps",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "GPS信号弱，请检查GPS模块是否有遮挡",
+                    "mainTitle": "GPS信号弱",
+                    "subTitle": "请检查GPS模块是否有遮挡"
+                },
+                "en": {
+                    "description": "Weak GPS signal. Please check if there is any obstruction to the GPS module.",
+                    "mainTitle": "Weak GPS signal",
+                    "subTitle": "Please check if there is any obstruction to the GPS module."
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+          }, 
+    
+    
+        {
+            "code" : 33000,
+            "name" : "Offline",
+            "app" : "rcbox",
+            "module" : "routerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "路由器离线，请检查路由器连接状态",
+                    "mainTitle": "路由器离线",
+                    "subTitle": "请检查路由器连接状态"
+                },
+                "en": {
+                    "description": "Router offline. Please check the connection status of the router.",
+                    "mainTitle": "Router offline.",
+                    "subTitle": "Please check the connection status of the router."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        }, 
+        {
+            "code" : 33001,
+            "name" : "wan disconnect",
+            "app" : "rcbox",
+            "module" : "routerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "路由器4/5G网络断开",
+                    "mainTitle": "路由器4/5G网络断开",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Router 4/5G network is disconnected.",
+                    "mainTitle": "Router 4/5G network is disconnected.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+          }, 
+          {
+            "code" : 33002,
+            "name" : "Poor wan signal",
+            "app" : "rcbox",
+            "module" : "routerMonitor",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "路由器4/5G信号差",
+                    "mainTitle": "路由器4/5G信号差",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "Poor router 4/5G signal.",
+                    "mainTitle": "Poor router 4/5G signal.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+          }, 
+
+
+          {
+            "code" : 34000,
+            "name" : "controller has large message interval.",
+            "app" : "rcbox",
+            "module" : "rcMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器报文延迟大",
+                    "mainTitle": "遥控器报文延迟大",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "controller has large message latency.",
+                    "mainTitle": "controller has large message latency.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+          }, 
+         {
+            "code" : 34001,
+            "name" : "rc packet interval large",
+            "app" : "rcbox",
+            "module" : "rcMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器报文间隔大",
+                    "mainTitle": "遥控器报文间隔大",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "controller has large message interval.",
+                    "mainTitle": "controller has large message interval.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+          }, 
+        {
+            "code" : 34002,
+            "name" : "rc high packet loss rate",
+            "app" : "rcbox",
+            "module" : "rcMonitor",
+            "active" : true,
+            "type" : "event",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "遥控器报文丢包率大",
+                    "mainTitle": "遥控器报文丢包率大",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "High loss rate of controller packet.",
+                    "mainTitle": "High loss rate of controller packet.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P4"
+            }
+        },
+
+        {
+            "code" : 42000,
+            "name" : "Free storage low",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机磁盘空间已超过70%，请拍照发群里，OS研发会解决",
+                    "mainTitle": "工控机磁盘空间已超过70%",
+                    "subTitle": "请拍照发群里，OS研发会解决"
+                },
+                "en": {
+                    "description": "The industrial computer's disk space usage has exceeded 70%. Please take a photo and send it to the group, the OS R&D will address the issue.",
+                    "mainTitle": "The industrial computer's disk space usage has exceeded 70%. ",
+                    "subTitle": "Please take a photo and send it to the group, the OS R&D will address the issue."
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 42001,
+            "name" : "Free storage critically low",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机磁盘空间已超过90%，无法作业",
+                    "mainTitle": "工控机磁盘空间已超过90%",
+                    "subTitle": "请立马联系YYL，需要立即解决，否则作业无法正常进行"
+                },
+                "en": {
+                    "description": "The industrial computer's disk space has exceeded 90%, unable to work.",
+                    "mainTitle": "The industrial computer's disk space has exceeded 90%.",
+                    "subTitle": "Please contact YYL immediately; the issue needs to be resolved urgently, otherwise, normal operations cannot proceed."
+                }
+            },
+            "submit": {
+                "level": "P1"
+            }
+        },
+        {
+            "code" : 42002,
+            "name" : "Cpu usage too high",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机CPU使用率偏高",
+                    "mainTitle": "工控机CPU使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The industrial computer's CPU usage is too high.",
+                    "mainTitle": "The industrial computer's CPU usage is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 42003,
+            "name" : "CPU usage excessively high",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机CPU使用率过高",
+                    "mainTitle": "工控机CPU使用率过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The industrial computer's CPU usage is excessively high.",
+                    "mainTitle": "The industrial computer's CPU usage is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 42004,
+            "name" : "Memory usage too high",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机内存使用率偏高",
+                    "mainTitle": "工控机内存使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The industrial computer's memory usage is too high.",
+                    "mainTitle": "The industrial computer's memory usage is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },        
+        {
+            "code" : 42005,
+            "name" : "Memory usage excessively high",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "critical", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机内存使用率过高",
+                    "mainTitle": "工控机内存使用率过高",
+                    "subTitle": "请重启遥控箱"
+                },
+                "en": {
+                    "description": "The industrial computer's memory usage is excessively high.",
+                    "mainTitle": "The industrial computer's memory usage is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },
+        {
+            "code" : 42006,
+            "name" : "Process CPU usage too high",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机进程CPU使用率偏高",
+                    "mainTitle": "工控机进程CPU使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The process of industrial computer's cpu usage is too high.",
+                    "mainTitle": "The process of industrial computer's cpu usage is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },
+        {
+            "code" : 42007,
+            "name" : "Process CPU usage excessively high",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机进程CPU使用率过高",
+                    "mainTitle": "工控机进程CPU使用率过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The process of industrial computer's cpu usage is excessively high.",
+                    "mainTitle": "The process of industrial computer's cpu usage is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        },        
+        {
+            "code" : 42008,
+            "name" : "Process memory usage too high",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "info", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机进程内存使用率偏高",
+                    "mainTitle": "工控机进程内存使用率偏高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The process of industrial computer's memory usage is too high.",
+                    "mainTitle": "The process of industrial computer's memory usage is too high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P3"
+            }
+        },        
+        {
+            "code" : 42009,
+            "name" : "Process memory usage excessively high",
+            "app" : "gateway",
+            "module" : "ipc",
+            "active" : true,
+            "type" : "state",
+            "level" : "warning", 
+            "interactive" : {
+                "zh-CN": {
+                    "description": "工控机进程内存使用率过高",
+                    "mainTitle": "工控机进程内存使用率过高",
+                    "subTitle": ""
+                },
+                "en": {
+                    "description": "The process of industrial computer's memory usage is excessively high.",
+                    "mainTitle": "The process of industrial computer's memory usage is excessively high.",
+                    "subTitle": ""
+                }
+            },
+            "submit": {
+                "level": "P0"
+            }
+        }
+    ]
+}
