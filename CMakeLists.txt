@@ -56,6 +56,6 @@ message(STATUS "PCL_INCLUDE_DIRS = ${PCL_INCLUDE_DIRS}")
 message(STATUS "Boost_INCLUDE_DIRS = ${Boost_INCLUDE_DIRS}")
 
 add_subdirectory(src)
-#add_subdirectory(test)
+add_subdirectory(test)
 
 ament_package()

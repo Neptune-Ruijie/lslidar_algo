@@ -5,8 +5,6 @@
 #include <pcl/point_cloud.h>
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/io/ply_io.h>
-#include <pcl/registration/icp.h>
-#include <pcl/registration/ndt.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
@@ -39,14 +37,6 @@ private:
   int load_ply();
 
   void update_ship_info();
-
-  void icp_to_angle(
-    std::shared_ptr<pcl::PointCloud<pcl::PointXYZ>> pc_t_minus_1,
-    std::shared_ptr<pcl::PointCloud<pcl::PointXYZ>> pc_t);
-
-  void ndt_to_angle(
-    std::shared_ptr<pcl::PointCloud<pcl::PointXYZ>> pc_t_minus_1,
-    std::shared_ptr<pcl::PointCloud<pcl::PointXYZ>> pc_t);
 
   void get_eulers(Eigen::Matrix4f &transformation_matrix);
 

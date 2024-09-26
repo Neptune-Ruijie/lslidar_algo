@@ -4,6 +4,7 @@
 #include <node_ship_gauge.hpp>
 #include <ostream>
 #include <pcl/impl/point_types.hpp>
+#include <point_cloud_registration.hpp>
 
 namespace ship_gauge
 {
@@ -117,95 +118,6 @@ void NodeShipGauge::update_ship_info()
   ndt_to_angle(pc_reduced_t_minus_1_, pc_reduced_t_);
   // pc_reduced_t_minus_1_ = pc_reduced_t_;
   pcl::copyPointCloud(*pc_reduced_t_, *pc_reduced_t_minus_1_);
-}
-
-void NodeShipGauge::icp_to_angle(
-  std::shared_ptr<pcl::PointCloud<pcl::PointXYZ>> pc_t_minus_1,
-  std::shared_ptr<pcl::PointCloud<pcl::PointXYZ>> pc_t)
-{
-  if (pc_t_minus_1->empty() || pc_t->empty()) {
-    std::cerr << "Source or target cloud is empty!" << std::endl;
-    return;
-  }
-  auto pc_aligned = std::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
-
-  // 创建ICP对象并设置参数
-  auto icp = std::make_shared<pcl::IterativeClosestPoint<pcl::PointXYZ, pcl::PointXYZ>>();
-  icp->setInputSource(pc_t_minus_1);
-  icp->setInputTarget(pc_t);
-  icp->align(*pc_aligned);
-
-  // std::cout << "----------- pc_t_minus_1 ------------" << std::endl;
-  // print_pc(pc_t_minus_1);
-  // std::cout << "----------- pc_t ------------" << std::endl;
-  // print_pc(pc_t);
-  // std::cout << "----------- pc_aligned ------------" << std::endl;
-  // print_pc(pc_aligned);
-
-  Eigen::Matrix4f transformation_matrix = icp->getFinalTransformation();
-  std::cout << "--- ICP ---" << std::endl;
-  get_eulers(transformation_matrix);
-
-  // 输出配准结果
-  // std::cout << "--- ICP has converged: " << icp->hasConverged() << " with score: " << icp->getFitnessScore() << std::endl;
-  // std::cout << "Transformation Matrix:" << std::endl;
-  // std::cout << transformation_matrix << std::endl;
-}
-
-void NodeShipGauge::ndt_to_angle(
-  std::shared_ptr<pcl::PointCloud<pcl::PointXYZ>> pc_t_minus_1,
-  std::shared_ptr<pcl::PointCloud<pcl::PointXYZ>> pc_t)
-{
-  if (pc_t_minus_1->empty() || pc_t->empty()) {
-    std::cerr << "Source or target cloud is empty!" << std::endl;
-    return;
-  }
-
-  // 创建NDT对象并设置参数
-  pcl::NormalDistributionsTransform<pcl::PointXYZ, pcl::PointXYZ> ndt;
-  ndt.setInputSource(pc_t_minus_1);
-  ndt.setInputTarget(pc_t);
-
-  // 设置配准参数
-  ndt.setMaximumIterations(35);  // Maximum number of iterations
-  ndt.setTransformationEpsilon(0.01);
-  ndt.setStepSize(0.1);
-  ndt.setResolution(1.0);
-
-  pcl::PointCloud<pcl::PointXYZ> Final;
-  ndt.align(Final);
-
-  Eigen::Matrix4f transformation_matrix = ndt.getFinalTransformation();
-  std::cout << "--- NDT ---" << std::endl;
-  get_eulers(transformation_matrix);
-
-  // 输出配准结果
-  // std::cout << "--- NDT has converged: " << ndt.hasConverged() << " with score: " << ndt.getFitnessScore() << std::endl;
-  // std::cout << "Transformation Matrix:" << std::endl;
-  // std::cout << transformation_matrix << std::endl;
-}
-
-void NodeShipGauge::get_eulers(Eigen::Matrix4f & transformation_matrix)
-{
-  // rot_mat and translation
-  Eigen::Matrix3f rotation_matrix = transformation_matrix.block<3, 3>(0, 0);
-  Eigen::Vector3f translation_vector = transformation_matrix.block<3, 1>(0, 3);
-
-  // Now we decompose the rotation matrix into Euler angles (Yaw, Pitch, Roll -> ZYX)
-  // Eigen's eulerAngles function returns angles in the specified axis order.
-  Eigen::Vector3f euler_angles =
-    rotation_matrix.eulerAngles(2, 1, 0);  // ZYX order (Yaw, Pitch, Roll)
-
-  // Convert radians to degrees if needed
-  euler_angles = euler_angles * (180.0 / M_PI);
-
-  // std::cout << "Rotation Matrix:" << rotation_matrix << std::endl;
-  // std::cout << "Translation: " << translation_vector.transpose() << std::endl;
-
-  // Print the Euler angles
-  std::cout << "Yaw (Z): " << euler_angles[0] << " degrees" << std::endl;
-  std::cout << "Pitch (Y): " << euler_angles[1] << " degrees" << std::endl;
-  std::cout << "Roll (X): " << euler_angles[2] << " degrees" << std::endl;
 }
 
 }  // namespace ship_gauge
